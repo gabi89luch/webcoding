@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.svelte-kit/
+.vite/
+*.log
+.DS_Store
+.env
+.env.local
+build/

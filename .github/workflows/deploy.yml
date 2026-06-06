@@ -1,0 +1,89 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build React site
+        working-directory: websites-learning/02-react-todo
+        run: |
+          npm install
+          npm run build
+
+      - name: Build Vue site
+        working-directory: websites-learning/03-vue-weather
+        run: |
+          npm install
+          npm run build
+
+      - name: Build Svelte site
+        working-directory: websites-learning/04-svelte-memory
+        run: |
+          npm install
+          npm run build
+
+      - name: Build Astro site
+        working-directory: websites-learning/05-astro-blog
+        run: |
+          npm install
+          npm run build
+
+      - name: Assemble deploy folder
+        working-directory: websites-learning
+        run: |
+          rm -rf deploy
+          mkdir -p deploy
+
+          # Hub at the root
+          cp index.html deploy/index.html
+          cp -r hub deploy/hub
+
+          # Site 1 — vanilla, just copy the source folder
+          cp -r 01-vanilla-portfolio deploy/01-vanilla-portfolio
+
+          # Sites 2-5 — Vite / Astro build into ./dist
+          cp -r 02-react-todo/dist        deploy/02-react-todo
+          cp -r 03-vue-weather/dist       deploy/03-vue-weather
+          cp -r 04-svelte-memory/dist     deploy/04-svelte-memory
+          cp -r 05-astro-blog/dist        deploy/05-astro-blog
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: websites-learning/deploy
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
