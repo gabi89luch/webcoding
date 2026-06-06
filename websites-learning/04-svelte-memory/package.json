@@ -1,0 +1,16 @@
+{
+  "name": "04-svelte-memory",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.1",
+    "svelte": "^5.1.16",
+    "vite": "^5.4.10"
+  }
+}

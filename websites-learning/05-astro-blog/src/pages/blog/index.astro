@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog — Astro Notes" description="All posts in the Astro Notes blog.">
+  <h1>Blog</h1>
+  <p class="meta">{posts.length} {posts.length === 1 ? "post" : "posts"}</p>
+
+  <ul class="posts">
+    {posts.map(post => (
+      <li>
+        <a href={`${import.meta.env.BASE_URL}blog/${post.slug}/`} class="title">{post.data.title}</a>
+        <p class="desc">{post.data.description}</p>
+        <p class="meta">
+          <time datetime={post.data.date.toISOString()}>
+            {post.data.date.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+          </time>
+          {post.data.author && <> · {post.data.author}</>}
+        </p>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .posts { list-style: none; padding: 0; display: grid; gap: 28px; }
+  .title { font-size: 1.4rem; font-weight: 700; }
+  .desc { color: var(--muted); margin: 6px 0 4px; }
+</style>

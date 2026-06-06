@@ -1,0 +1,48 @@
+---
+const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL;
+const homePath = base;
+const blogPath = `${base}blog`;
+
+const isHome = pathname === homePath || pathname === homePath.replace(/\/$/, "");
+const isBlog = pathname === blogPath || pathname.startsWith(`${blogPath}/`);
+---
+
+<header class="site-header">
+  <nav>
+    <a href={base} class="logo">Astro Notes</a>
+    <ul>
+      <li><a href={base} class={isHome ? "active" : ""}>Home</a></li>
+      <li><a href={`${base}blog/`} class={isBlog ? "active" : ""}>Blog</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: rgba(253, 252, 250, 0.85);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 1.1rem;
+    letter-spacing: -.02em;
+  }
+  ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; }
+  ul a { color: var(--muted); font-size: .95rem; }
+  ul a:hover { color: var(--text); text-decoration: none; }
+  ul a.active { color: var(--accent); font-weight: 600; }
+</style>

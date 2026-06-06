@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Carter — Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav>
+      <a href="#" class="logo">AC</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button id="theme-toggle" aria-label="Toggle theme">
+            <span class="icon-sun">☀</span>
+            <span class="icon-moon">☾</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Hello, I'm</p>
+      <h1>Alex Carter</h1>
+      <p class="lead">A frontend developer learning the web platform from the ground up — semantic HTML, modern CSS, and vanilla JavaScript.</p>
+      <div class="cta">
+        <a href="#projects" class="btn primary">See my work</a>
+        <a href="#contact" class="btn ghost">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>I build accessible, fast, and delightful interfaces. This page is built without any framework or build step — just HTML, CSS, and a sprinkle of JavaScript.</p>
+      <ul class="skills">
+        <li>Semantic HTML</li>
+        <li>Modern CSS (Grid, Flexbox, custom properties)</li>
+        <li>Vanilla JS (DOM, Fetch, localStorage)</li>
+        <li>Responsive design</li>
+        <li>Accessibility</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="projects">
+      <h2>Projects</h2>
+      <div class="project-grid" id="project-grid">
+        <!-- Projects rendered by script.js -->
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>Want to chat? Drop a message.</p>
+      <form id="contact-form" novalidate>
+        <label>
+          <span>Name</span>
+          <input name="name" type="text" required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" required />
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit" class="btn primary">Send</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Alex Carter · Built with vanilla web.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

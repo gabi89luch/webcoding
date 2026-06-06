@@ -1,0 +1,131 @@
+:root {
+  --bg: #0c1220;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-2: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #60a5fa;
+  --radius: 14px;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0c1220 0%, #1e1b4b 50%, #312e81 100%);
+  color: var(--text);
+}
+
+.app { max-width: 640px; margin: 0 auto; padding: 48px 20px 64px; }
+
+header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  letter-spacing: -.03em;
+  background: linear-gradient(120deg, #60a5fa, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lead { color: var(--muted); margin: 4px 0 28px; }
+
+.cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.cities button {
+  font: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s;
+  font-size: .9rem;
+}
+.cities button:hover { color: var(--text); border-color: var(--accent); }
+.cities button.active {
+  background: var(--accent);
+  color: #0b1220;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card.loading, .card.error { text-align: center; color: var(--muted); }
+.card.error button {
+  margin-top: 12px;
+  background: var(--accent);
+  color: #0b1220;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.current .now {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.current .icon { font-size: 3.5rem; }
+.current h2 { margin: 0; font-size: 1.4rem; }
+.current .desc { color: var(--muted); margin: 2px 0 0; }
+.current .temp {
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: -.04em;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--border);
+}
+.stats div { text-align: center; }
+.stats dt { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.stats dd { margin: 4px 0 0; font-weight: 600; }
+
+.forecast h3 { margin: 0 0 12px; font-size: 1rem; color: var(--muted); font-weight: 500; }
+.forecast ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+.forecast li {
+  display: grid;
+  grid-template-columns: 60px 32px 1fr 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.forecast .day { color: var(--muted); font-size: .9rem; }
+.forecast .ic { font-size: 1.2rem; }
+.forecast .hi { font-weight: 600; }
+.forecast .lo { color: var(--muted); }
+
+footer { margin-top: 32px; text-align: center; color: var(--muted); font-size: .85rem; }
+footer a { color: var(--accent); }
